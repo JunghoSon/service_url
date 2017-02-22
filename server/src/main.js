@@ -20,7 +20,7 @@ db.once('open', () => {
 });
 mongoose.connect('mongodb://jhson:wjdgh0754522@ds157549.mlab.com:57549/serv_urls');
 
-app.use('/', express.static(__dirname + '/../../build'));
+app.use('/', express.static(__dirname + '/../../public'));
 app.use('/api', api)
 
 app.listen(port, () => {

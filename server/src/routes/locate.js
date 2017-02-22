@@ -1,6 +1,6 @@
 import express from 'express';
-import Locate from '../models/Locate';
 import mongoose from 'mongoose';
+import Locate from '../models/Locate';
 
 const router = express.Router();
 
