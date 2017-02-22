@@ -8,6 +8,7 @@ class Home extends Component{
         super(props);
         
         this.state = {
+            initial: true,
             loadingState: false
         };
         
@@ -15,7 +16,12 @@ class Home extends Component{
     }
     
     componentDidMount(){
-        this.props.searchLocateRequest(true, undefined);
+        this.props.searchLocateRequest(true, undefined)
+            .then(() => {
+                this.setState({
+                    initial: false
+                });
+            });
     }
     
     loadLocate(){
@@ -36,7 +42,7 @@ class Home extends Component{
             });
     }
     
-    handleSearch(isInitial){
+    handleSearch(){
         if(!this.state.loadingState){
             this.loadLocate();
             this.setState({
@@ -46,10 +52,13 @@ class Home extends Component{
     }
     
     render(){
+        let btnMore = (
+            <a onClick={this.handleSearch} className="btn_more round">MORE</a>
+        );
         return (
             <div className="container">
                 <LocateList items={this.props.items}/>
-                <a onClick={this.handleSearch} className="btn_more">MORE</a>
+                {this.props.isLast || this.state.initial ? undefined : btnMore}
             </div>
         );
     }

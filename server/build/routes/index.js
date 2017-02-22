@@ -8,9 +8,9 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _location = require('./location');
+var _locate = require('./locate');
 
-var _location2 = _interopRequireDefault(_location);
+var _locate2 = _interopRequireDefault(_locate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22,6 +22,6 @@ router.use('/*', function (req, res, next) {
     next();
 });
 
-router.use('/location', _location2.default);
+router.use('/locate', _locate2.default);
 
 exports.default = router;

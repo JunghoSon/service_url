@@ -27,7 +27,7 @@ export default function locate(state, action){
                     locate: {
                         status: {$set: 'SUCCESS'},
                         items: {$set: action.data},
-                        isLast: {$set: action.data.length < 20}
+                        isLast: {$set: action.data.length < 10}
                     }
                 });
             }else{
@@ -35,7 +35,7 @@ export default function locate(state, action){
                     locate: {
                         status: {$set: 'SUCCESS'},
                         items: {$push: action.data},
-                        isLast: {$set: action.data.length < 20}
+                        isLast: {$set: action.data.length < 10}
                     }
                 });
             }

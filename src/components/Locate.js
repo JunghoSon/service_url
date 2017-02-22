@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
 
 class Locate extends Component{
+    shouldComponentUpdate(nextProps, nextState){
+        let current = {
+            props: this.props,
+            state: this.state
+        };
+        
+        let next = {
+            props: nextProps,
+            state: nextState
+        };
+        
+        let update = JSON.stringify(current) !== JSON.stringify(next);
+        return update;
+    }
+    
     render(){
+        let d = new Date(this.props.date);
+        let date = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        
         return (
-            <li><a href={this.props.loc} target="_blank">{this.props.title} :<br /><span>{this.props.loc}</span><br />{this.props.email} / {this.props.date}</a></li>
+            <li className="round">
+                <a href={this.props.loc} target="_blank">
+                    <dl>
+                        <dt>{this.props.title}</dt>
+                        <dd>{this.props.loc}</dd>
+                        <dd>{this.props.email}</dd>
+                        <dd>{date}</dd>
+                    </dl>
+                </a>
+            </li>
         );
     }
 }

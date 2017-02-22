@@ -1,10 +1,10 @@
 @charset 'utf-8';
 /* Reset */
 html,body{width:100%;height:100%}
-html{overflow-y:scroll;font-size:10px}
+html{overflow-y:scroll}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,form,fieldset,p,button{margin:0;padding:0}
-body,h1,h2,h3,h4,input,button{font-family:Dotum,'µ¸¿ò',Helvetica,AppleSDGothicNeo,sans-serif;font-size:12px;color:#383d41}
-body{background-color:#fff;text-align:center;*word-break:break-all;-ms-word-break:break-all}
+body,h1,h2,h3,h4,input,button{font-family:Dotum,'µ¸¿ò',Helvetica,AppleSDGothicNeo,sans-serif;font-size:14px;color:#383d41}
+body{background-color:#f6f6f6;text-align:center;*word-break:break-all;-ms-word-break:break-all}
 img,fieldset,iframe{border:0 none}
 li{list-style:none}
 input,select,button{vertical-align:middle}
@@ -13,7 +13,6 @@ i,em,address{font-style:normal}
 label,button{cursor:pointer}
 button{margin:0;padding:0}
 a{color:#222;text-decoration:none}
-a:hover{color:#390;text-decoration:underline}
 button *{position:relative}
 button img{left:-3px;*left:auto}
 html:first-child select{height:20px;padding-right:6px}
@@ -24,12 +23,49 @@ table{border-collapse:collapse;border-spacing:0}
 input::-ms-clear{display:none}
 
 /* layout */
-.header{padding:20px 20px 10px;border-bottom:2px solid #000;text-align:left}
+.header{padding:20px 20px 10px;border-bottom:2px solid #333;background:#fff;text-align:left}
 .header h1{font-size:20px;font-weight:bold}
 
-.container{width:90%;padding-top:20px;margin:0 auto;text-align:left}
+.container{padding:15px 0 20px;text-align:left}
 
-.locate_list li{padding-bottom:20px;color:#666}
-.locate_list li a{word-wrap:break-word}
-.locate_list li a span{font-size:14px;font-weight:bold;text-decoration:bold;color:#000}
-.btn_more{display:inline-block;padding:10px;border:1px solid #ccc;background:#f9f9f9;cursor:pointer}
+.round{
+    border:1px solid #ddd;background:#fff;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-box-shadow:0 1px 4px rgba(0,0,0,.2);
+    box-shadow:0 1px 4px rgba(0,0,0,.2);
+}
+
+.locate_list{width:92%;margin:0 auto}
+.locate_list li{width:100%;padding:15px;margin-bottom:10px;color:#666}
+.locate_list li a{display:block;word-wrap:break-word}
+.locate_list li dt{padding-bottom:5px;font-size:16px;font-weight:bold;text-decoration:underline;color:#000}
+.locate_list li dd{padding-top:2px}
+.btn_more{display:block;width:92%;height:50px;line-height:50px;margin:10px auto 0;border:1px solid #ccc;background:#f9f9f9;font-size:16px;font-weight:bold;text-align:center;cursor:pointer}
+
+@-webkit-keyframes locate-enter {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+@keyframes locate-enter {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+.locate-enter {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-name: locate-enter;
+    animation-name: locate-enter;
+}

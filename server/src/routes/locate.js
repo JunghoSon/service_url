@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     Locate.find({})
        .sort({_id:-1})
-       .limit(20)
+       .limit(10)
        .exec((err, Locates) => {
            if(err) throw err;
            res.json(Locates);
@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
     
     Locate.find({_id: {$lt: objectId}})
        .sort({_id:-1})
-       .limit(20)
+       .limit(10)
        .exec((err, Locates) => {
            if(err) throw err;
            res.json(Locates);
