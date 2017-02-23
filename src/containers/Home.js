@@ -52,12 +52,20 @@ class Home extends Component{
     }
     
     render(){
+        let list = (
+            <LocateList items={this.props.items}/>
+        );
+        
+        let noneList = (
+            <p>저장된 목록이 없습니다.</p>
+        );
+        
         let btnMore = (
             <a onClick={this.handleSearch} className="btn_more round">MORE</a>
         );
         return (
             <div className="container">
-                <LocateList items={this.props.items}/>
+                {this.props.items.length === 0 ? noneList : list}
                 {this.props.isLast || this.state.initial ? undefined : btnMore}
             </div>
         );

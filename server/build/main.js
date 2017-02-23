@@ -34,7 +34,8 @@ db.on('error', console.error);
 db.once('open', function () {
     console.log('Connected to mongodb server');
 });
-_mongoose2.default.connect('mongodb://jhson:wjdgh0754522@ds157549.mlab.com:57549/serv_urls');
+//mongoose.connect('mongodb://jhson:wjdgh0754522@ds157549.mlab.com:57549/serv_urls');
+_mongoose2.default.connect('mongodb://localhost/serv_urls');
 
 app.use('/', _express2.default.static(__dirname + '/../../public'));
 app.use('/api', _routes2.default);
