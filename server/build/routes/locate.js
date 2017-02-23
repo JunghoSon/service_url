@@ -8,13 +8,13 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _Locate = require('../models/Locate');
-
-var _Locate2 = _interopRequireDefault(_Locate);
-
 var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _Locate = require('../models/Locate');
+
+var _Locate2 = _interopRequireDefault(_Locate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,7 +44,7 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    _Locate2.default.find({}).sort({ _id: -1 }).limit(20).exec(function (err, Locates) {
+    _Locate2.default.find({}).sort({ _id: -1 }).limit(10).exec(function (err, Locates) {
         if (err) throw err;
         res.json(Locates);
     });
@@ -53,7 +53,7 @@ router.get('/', function (req, res) {
 router.get('/:id', function (req, res) {
     var objectId = new _mongoose2.default.Types.ObjectId(req.params.id);
 
-    _Locate2.default.find({ _id: { $lt: objectId } }).sort({ _id: -1 }).limit(20).exec(function (err, Locates) {
+    _Locate2.default.find({ _id: { $lt: objectId } }).sort({ _id: -1 }).limit(10).exec(function (err, Locates) {
         if (err) throw err;
         res.json(Locates);
     });

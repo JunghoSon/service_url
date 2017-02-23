@@ -36,7 +36,7 @@ db.once('open', function () {
 });
 _mongoose2.default.connect('mongodb://jhson:wjdgh0754522@ds157549.mlab.com:57549/serv_urls');
 
-app.use('/', _express2.default.static(__dirname + '/../../build'));
+app.use('/', _express2.default.static(__dirname + '/../../public'));
 app.use('/api', _routes2.default);
 
 app.listen(port, function () {
