@@ -65,7 +65,7 @@ class Home extends Component{
         );
         return (
             <div className="container">
-                {this.props.items.length === 0 ? noneList : list}
+                {this.props.items.length === 0 && !this.state.initial ? noneList : list}
                 {this.props.isLast || this.state.initial ? undefined : btnMore}
             </div>
         );
