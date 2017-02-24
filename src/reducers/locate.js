@@ -33,25 +33,14 @@ export default function locate(state, action){
                     }
                 });
             }else{
-                if(action.isSort){
-                    return update(state, {
-                        locate: {
-                            status: {$set: 'SUCCESS'},
-                            items: {$set: action.data},
-                            isLast: {$set: action.data.length < 10},
-                            emailId: {$set: action.emailId}
-                        }
-                    });
-                }else{
-                    return update(state, {
-                        locate: {
-                            status: {$set: 'SUCCESS'},
-                            items: {$push: action.data},
-                            isLast: {$set: action.data.length < 10},
-                            emailId: {$set: action.emailId}
-                        }
-                    });
-                }
+                return update(state, {
+                    locate: {
+                        status: {$set: 'SUCCESS'},
+                        items: {$push: action.data},
+                        isLast: {$set: action.data.length < 10},
+                        emailId: {$set: action.emailId}
+                    }
+                });
             }
         case types.SEARCH_LOCATE_FAILURE:
             return update(state, {

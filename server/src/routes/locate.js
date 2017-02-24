@@ -76,7 +76,7 @@ router.get('/:emailId/:id', (req, res) => {
     let objectId = new mongoose.Types.ObjectId(req.params.id);
     let query = {_id: {$lt: objectId}};
     
-    if(req.params.emailId !== 'all'){
+    if(typeof req.params.emailId !== 'undefined' && req.params.emailId !== 'all'){
         let re = new RegExp('^' + req.params.emailId);
         query.email = {$regex: re};
     }
