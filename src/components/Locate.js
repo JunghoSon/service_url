@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class Locate extends Component{
+    constructor(props){
+        super(props);
+    }
+    
     shouldComponentUpdate(nextProps, nextState){
         let current = {
             props: this.props,

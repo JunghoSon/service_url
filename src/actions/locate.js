@@ -5,16 +5,21 @@ import {
 } from './ActionTypes';
 import axios from 'axios';
 
-export function searchLocateRequest(isInitial, id){
+export function searchLocateRequest(isInitial, id, emailId, isSort){
     return (dispatch) => {
         dispatch(searchLocate());
         
         let url = '/api/locate'
-        url = isInitial ? url : `${url}/${id}`;
+        
+        if(isInitial){
+            if(typeof emailId !== 'undefined') url = `${url}/${emailId}`;
+        }else{
+            url = `${url}/${emailId}/${id}`;
+        }
         
         return axios.get(url)
                     .then((response) => {
-                        dispatch(searchListSuccess(isInitial, response.data));
+                        dispatch(searchListSuccess(isInitial, response.data, emailId, isSort));
                     })
                     .catch((error) => {
                         dispatch(searchListFailure());
@@ -28,11 +33,13 @@ export function searchLocate(){
     };
 }
 
-export function searchListSuccess(isInitial, data){
+export function searchListSuccess(isInitial, data, emailId, isSort){
     return {
         type: SEARCH_LOCATE_SUCCESS,
         isInitial,
-        data
+        data,
+        emailId,
+        isSort
     };
 }
 

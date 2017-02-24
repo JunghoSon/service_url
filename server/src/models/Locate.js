@@ -9,4 +9,14 @@ const Locate = new Schema({
     date: {type: Date, default: Date.now}
 });
 
+Locate.statics.create = function(loc, title, email){
+    const locate = new this({
+        loc,
+        title,
+        email
+    });
+    
+    return locate.save();
+};
+
 export default mongoose.model('Locate', Locate);

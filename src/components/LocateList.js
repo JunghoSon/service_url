@@ -3,6 +3,11 @@ import { Locate } from 'components';
 import ReactCssTransitionGroup from 'react-addons-css-transition-group';
 
 class LocateList extends Component{
+    shouldComponentUpdate(nextProps, nextState){
+        let update = JSON.stringify(this.props) !== JSON.stringify(nextProps);
+        return update;
+    }
+    
     render(){
         const mapToComponents = (items) => {
             return items.map((locate, i) => {
@@ -17,7 +22,7 @@ class LocateList extends Component{
                 <ReactCssTransitionGroup
                     transitionName="locate"
                     transitionEnterTimeout={2000}
-                    transitionLeaveTimeout={2000}>
+                    transitionLeaveTimeout={10}>
                         {mapToComponents(this.props.items)}
                 </ReactCssTransitionGroup>
             </ul>
