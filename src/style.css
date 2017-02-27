@@ -47,6 +47,7 @@ input::-ms-clear{display:none}
 
 .sort{width:92%;padding-bottom:10px;margin:0 auto}
 .sort select{width:100%;height:50px;background:#none;border:2px solid #666;padding:0 10px;font-size:16px;font-weight:bold}
+.no_list{padding:50px 0;text-align:center}
 
 @-webkit-keyframes locate-enter {
     0% {

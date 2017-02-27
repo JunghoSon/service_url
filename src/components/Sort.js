@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { browserHistory } from 'react-router';
 
 class Sort extends Component{
     constructor(props){
@@ -9,6 +10,14 @@ class Sort extends Component{
         };
         
         this.handleChange = this.handleChange.bind(this);
+    }
+    
+    componentDidMount(){
+        if(localStorage.getItem('emailId') !== null){
+            this.setState({
+                sort: localStorage.getItem('emailId')
+            });
+        }
     }
     
     shouldComponentUpdate(nextProps, nextState){
@@ -37,9 +46,11 @@ class Sort extends Component{
     render(){
         let mapToOptions = (items) => {
             return items.map((item, i) => {
-                return (
-                    <option value={item.emailId} key={i}>{item.emailId}</option>
-                );
+                if(item.emailId !== ''){
+                    return (
+                        <option value={item.emailId} key={i}>{item.emailId}</option>
+                    );
+                }
             });
         };
         

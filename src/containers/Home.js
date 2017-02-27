@@ -19,57 +19,66 @@ class Home extends Component{
     
     componentDidMount(){
         this.props.searchEmailIdRequest();
-        this.props.searchLocateRequest(true, undefined, undefined)
-            .then(() => {
-                this.setState({
-                    initial: false
+        
+        if(localStorage.getItem('emailId') !== null){
+            this.handleSort(localStorage.getItem('emailId'))
+                .then(() => {
+                    this.setState({
+                        initial: false
+                    });
                 });
-            });
-    }
-    
-    loadLocate(){
-        if(this.props.isLast){
-            return new Promise((resolve, reject) => {
-                resolve();
-            });
+        }else{
+            this.props.searchLocateRequest(true, undefined, undefined)
+                .then(() => {
+                    this.setState({
+                        initial: false
+                    });
+                    
+                    localStorage.setItem('emailId', this.props.emailId);
+                });
         }
-        
-        let lastId = this.props.items[this.props.items.length - 1]._id;
-        
-        this.props.searchLocateRequest(false, lastId, this.props.emailId)
-            .then(() => {
-                if(this.props.isLast) alert('마지막 목록 입니다!');
-                this.setState({
-                    loadingState: false
-                });
-            });
-    }
-    
-    sortLocate(emailId){
-        this.props.searchLocateRequest(true, undefined, emailId)
-            .then(() => {
-                if(this.props.isLast) alert('마지막 목록 입니다!');
-                this.setState({
-                    loadingState: false
-                });
-            });
     }
     
     handleSearch(){
         if(!this.state.loadingState){
-            this.loadLocate();
             this.setState({
                 loadingState: true
             });
+            
+            if(this.props.isLast){
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            }
+            
+            let lastId = this.props.items[this.props.items.length - 1]._id;
+            
+            return this.props.searchLocateRequest(false, lastId, this.props.emailId)
+                        .then(() => {
+                            if(this.props.isLast) alert('마지막 목록 입니다!');
+                            
+                            this.setState({
+                                loadingState: false
+                            });
+                            
+                            localStorage.setItem('emailId', this.props.emailId);
+                        });
         }
     }
     
     handleSort(emailId){
         if(!this.state.loadingState){
-            this.sortLocate(emailId);
             this.setState({
                 loadingState: true
             });
+            
+            return this.props.searchLocateRequest(true, undefined, emailId)
+                       .then(() => {
+                           this.setState({
+                               loadingState: false
+                           });
+                           localStorage.setItem('emailId', this.props.emailId);
+                       });
         }
     }
     
@@ -79,7 +88,7 @@ class Home extends Component{
         );
         
         let noneList = (
-            <p>저장된 목록이 없습니다.</p>
+            <p className="no_list">저장된 목록이 없습니다.</p>
         );
         
         let btnMore = (
@@ -87,7 +96,7 @@ class Home extends Component{
         );
         return (
             <div className="container">
-                <Sort emailIds={this.props.emailIds} onSearch={this.handleSort}/>
+                <Sort emailIds={this.props.emailIds} emailId={this.props.params.emailId} onSearch={this.handleSort}/>
                 {this.props.items.length === 0 && !this.state.initial ? noneList : list}
                 {this.props.isLast || this.state.initial ? undefined : btnMore}
             </div>

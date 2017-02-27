@@ -8,7 +8,6 @@ import axios from 'axios';
 export function searchLocateRequest(isInitial, id, emailId){
     return (dispatch) => {
         dispatch(searchLocate());
-        
         let url = '/api/locate'
         
         if(isInitial){
@@ -19,7 +18,7 @@ export function searchLocateRequest(isInitial, id, emailId){
         
         return axios.get(url)
                     .then((response) => {
-                        emailId = typeof emailId === 'undefined' ? 'all' : emailId;
+                        emailId = (typeof emailId === 'undefined') ? 'all' : emailId;
                         dispatch(searchListSuccess(isInitial, response.data, emailId));
                     })
                     .catch((error) => {
